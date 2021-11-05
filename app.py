@@ -32,7 +32,10 @@ sns_format = '%m/%d/%Y'
 
 provincias = pd.read_csv(DATA_PATH.joinpath('provincias.csv'))
 
-df_conf = pd.read_csv(DATA_PATH.joinpath('ops-conf.csv'))
+url_conf = 'https://drive.google.com/file/d/1O0FVM76AH0qL8sWle1S1e8jcteCD6HXs/view?usp=sharing'
+
+#df_conf = pd.read_csv(DATA_PATH.joinpath('ops-conf.csv'))
+df_conf = pd.read_csv(url_conf)
 df_conf['confirmado']=df_conf['confirmado'].astype(int)
 df_conf['prov']=df_conf['prov'].astype(int)
 df_conf['fecha_confirmado'] = pd.to_datetime(df_conf['fecha_confirmado'], format=date_format)
