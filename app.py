@@ -14,7 +14,6 @@ import json
 from scipy import stats as sps
 from scipy.interpolate import interp1d
 from scipy.integrate import odeint
-from whitenoise import WhiteNoise
 
 # -----------------------------
 # Declare APP
@@ -22,15 +21,11 @@ from whitenoise import WhiteNoise
 app = dash.Dash(__name__)
 server = app.server
 app.title = 'Calculadora Epidemiológica - República Dominicana'
-server.wsgi_app = WhiteNoise(server.wsgi_app, root='static/')
 
 # -----------------------------
 # Load static data
 # -----------------------------
 
-PATH = pathlib.Path(__file__).parent
-DATA_PATH = PATH.joinpath("data").resolve()
-CONFIG_PATH = PATH.joinpath("config").resolve()
 GAMMA_RT = 1/7     #1/serial interval 
 RT_MAX = 12    #every possible value of Rt
 rt_range = np.linspace(0, RT_MAX, RT_MAX*100+1)
@@ -39,24 +34,25 @@ date_format = '%Y-%m-%dT%H:%M:%S'               #DB date format
 dpr_format = '%Y-%m-%d'                         #Date Picker Range format
 sns_format = '%m/%d/%Y'
 
-#provincias = pd.read_csv(DATA_PATH.joinpath('provincias.csv'))
-provincias = pd.read_csv('data/provincias.csv')
+url_prov='https://github.com/victormlgh/digepi-epicalc/blob/main/data/provincias.csv?raw=true'
+url_conf='https://github.com/victormlgh/digepi-epicalc/blob/main/data/ops-conf.csv?raw=true'
+url_def='https://github.com/victormlgh/digepi-epicalc/blob/main/data/ops-def.csv?raw=true'
+url_sns='https://github.com/victormlgh/digepi-epicalc/blob/main/data/sns.csv?raw=true'
 
-#df_conf = pd.read_csv(DATA_PATH.joinpath('ops-conf.csv'))
-df_conf = pd.read_csv('data/ops-conf.csv')
+provincias = pd.read_csv(url_prov)
+
+df_conf = pd.read_csv(url_conf)
 
 df_conf['confirmado']=df_conf['confirmado'].astype(int)
 df_conf['prov']=df_conf['prov'].astype(int)
 df_conf['fecha_confirmado'] = pd.to_datetime(df_conf['fecha_confirmado'], format=date_format)
 
-#df_def = pd.read_csv(DATA_PATH.joinpath('ops-def.csv'))
-df_def = pd.read_csv('data/ops-def.csv')
+df_def = pd.read_csv(url_def)
 df_def['fallecido']=df_def['fallecido'].astype(int)
 df_def['prov']=df_def['prov'].astype(int)
 df_def['fecha_fallecido'] = pd.to_datetime(df_def['fecha_fallecido'], format=date_format)
 
-#df_sns = pd.read_csv(DATA_PATH.joinpath('sns.csv'))
-df_sns = pd.read_csv('data/sns.csv')
+df_sns = pd.read_csv(url_sns)
 df_sns['fecha'] = pd.to_datetime(df_sns['fecha'], format=sns_format)
 
 
@@ -73,7 +69,7 @@ app.layout = html.Div(
                     [
                         html.A(
                             html.Img(
-                                src=app.get_asset_url("Logo_SaludPublica.png"),
+                                src="https://github.com/victormlgh/digepi-epicalc/raw/main/assets/Logo_SaludPublica.png",
                                 style={
                                     "height": "150px",
                                     "width": "auto",
@@ -108,7 +104,7 @@ app.layout = html.Div(
                     [
                         html.A(
                             html.Img(
-                                src=app.get_asset_url("Logo_DIGEPI.png"),
+                                src='https://github.com/victormlgh/digepi-epicalc/blob/main/assets/Logo_DIGEPI.png',
                                 style={
                                     "height": "150px",
                                     "width": "auto",
