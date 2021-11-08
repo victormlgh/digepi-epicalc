@@ -14,6 +14,15 @@ import json
 from scipy import stats as sps
 from scipy.interpolate import interp1d
 from scipy.integrate import odeint
+from whitenoise import WhiteNoise
+
+# -----------------------------
+# Declare APP
+# -----------------------------
+app = dash.Dash(__name__)
+server = app.server
+app.title = 'Calculadora Epidemiológica - República Dominicana'
+server.wsgi_app = WhiteNoise(server.wsgi_app, root='static/')
 
 # -----------------------------
 # Load static data
@@ -30,28 +39,26 @@ date_format = '%Y-%m-%dT%H:%M:%S'               #DB date format
 dpr_format = '%Y-%m-%d'                         #Date Picker Range format
 sns_format = '%m/%d/%Y'
 
-provincias = pd.read_csv(DATA_PATH.joinpath('provincias.csv'))
+#provincias = pd.read_csv(DATA_PATH.joinpath('provincias.csv'))
+provincias = pd.read_csv('data/provincias.csv')
 
-df_conf = pd.read_csv(DATA_PATH.joinpath('ops-conf.csv'))
+#df_conf = pd.read_csv(DATA_PATH.joinpath('ops-conf.csv'))
+df_conf = pd.read_csv('data/ops-conf.csv')
 
 df_conf['confirmado']=df_conf['confirmado'].astype(int)
 df_conf['prov']=df_conf['prov'].astype(int)
 df_conf['fecha_confirmado'] = pd.to_datetime(df_conf['fecha_confirmado'], format=date_format)
 
-df_def = pd.read_csv(DATA_PATH.joinpath('ops-def.csv'))
+#df_def = pd.read_csv(DATA_PATH.joinpath('ops-def.csv'))
+df_def = pd.read_csv('data/ops-def.csv')
 df_def['fallecido']=df_def['fallecido'].astype(int)
 df_def['prov']=df_def['prov'].astype(int)
 df_def['fecha_fallecido'] = pd.to_datetime(df_def['fecha_fallecido'], format=date_format)
 
-df_sns = pd.read_csv(DATA_PATH.joinpath('sns.csv'))
+#df_sns = pd.read_csv(DATA_PATH.joinpath('sns.csv'))
+df_sns = pd.read_csv('data/sns.csv')
 df_sns['fecha'] = pd.to_datetime(df_sns['fecha'], format=sns_format)
 
-# -----------------------------
-# Declare APP
-# -----------------------------
-app = dash.Dash(__name__)
-server = app.server
-app.title = 'Calculadora Epidemiológica - República Dominicana'
 
 # -----------------------------
 # App layout section
