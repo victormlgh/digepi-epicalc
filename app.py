@@ -29,12 +29,14 @@ DATA_PATH = PATH.joinpath("data").resolve()
 url_prov ='https://github.com/victormlgh/digepi-epicalc/blob/main/data/provincias.csv?raw=true'
 provincias = pd.read_csv(url_prov)
 
-url_conf = 'https://github.com/victormlgh/digepi-epicalc/blob/main/data/ops-filter.csv?raw=true'
+#url_conf = 'https://github.com/victormlgh/digepi-epicalc/blob/main/data/ops-filter.csv?raw=true'
+url_conf = 'https://github.com/victormlgh/digepi-epicalc/blob/main/data/ops-filter2.csv?raw=true'
 df_conf = pd.read_csv(url_conf)
 
 df_conf['confirmado']=df_conf['confirmado'].astype(int)
 df_conf['cedula']=df_conf['cedula'].astype(int)
 df_conf['prov']=df_conf['prov'].astype(int)
+df_conf['edad']=df_conf['edad'].astype(int)
 df_conf['fecha_confirmado'] = pd.to_datetime(df_conf['fecha_confirmado'], format=date_format)
 
 url_def = 'https://github.com/victormlgh/digepi-epicalc/blob/main/data/ops-def.csv?raw=true'
