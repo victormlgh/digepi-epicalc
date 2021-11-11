@@ -122,6 +122,13 @@ app.layout = html.Div(
             style={"margin-bottom": "25px"},
         ),
 
+        html.Div(
+            [
+                html.H3("Histórico de la evolución del COVID-19 en la República Dominicana", className="control_label"),
+            ],
+            className="row flex-display",
+        ),
+
         #Botones de selección
         html.Div(
             [
@@ -237,6 +244,12 @@ app.layout = html.Div(
                 ),
 
                 
+            ],
+            className="row flex-display",
+        ),
+        html.Div(
+            [
+                html.H3("Estimaciones del Modelo SEIR ampliado con la variable de infectados", className="control_label"),
             ],
             className="row flex-display",
         ),
