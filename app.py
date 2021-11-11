@@ -29,8 +29,7 @@ DATA_PATH = PATH.joinpath("data").resolve()
 url_prov ='https://github.com/victormlgh/digepi-epicalc/blob/main/data/provincias.csv?raw=true'
 provincias = pd.read_csv(url_prov)
 
-#url_conf = 'https://github.com/victormlgh/digepi-epicalc/blob/main/data/ops-filter.csv?raw=true'
-url_conf = 'https://github.com/victormlgh/digepi-epicalc/blob/main/data/ops-filter2.csv?raw=true'
+url_conf = 'https://github.com/victormlgh/digepi-epicalc/blob/main/data/ops-filter.csv?raw=true'
 df_conf = pd.read_csv(url_conf)
 
 df_conf['confirmado']=df_conf['confirmado'].astype(int)
@@ -176,7 +175,17 @@ app.layout = html.Div(
                                 value="T",
                                 labelStyle={"display": "inline-block"},
                                 className="dcc_control",
-                            ),                        
+                            ),   
+                        html.P("Filtrar por edad:", className="control_label"),
+                        dcc.RangeSlider(
+                            id='edad_range',
+                            min=0,
+                            max=100,
+                            step=1,
+                            value=[0,100],
+                            tooltip={"placement": "bottom", "always_visible": True}
+                        ),
+
                     ],
 
                     className="pretty_container three columns",
@@ -340,7 +349,7 @@ app.layout = html.Div(
 # Function section
 # -----------------------------
 
-def filter_confirmado_data(df,group_type_selector, province_selector, sex_selector, start_time, end_time):    
+def filter_confirmado_data(df,group_type_selector, province_selector, sex_selector, start_time, end_time, edades):    
     #filter by province
     if province_selector >0:
         df = df.loc[df['prov'] == province_selector]
@@ -348,6 +357,9 @@ def filter_confirmado_data(df,group_type_selector, province_selector, sex_select
     #filter by sex
     if sex_selector != 'T':
         df = df.loc[df['sexo'] == sex_selector]
+
+    #filter by edad
+    df = df.loc[df['edad'].between(edades[0],edades[1])]
     
     #Group by period
     df_filter = df.groupby([pd.Grouper(key='fecha_confirmado', freq=group_type_selector)]).agg({'confirmado':'sum', 'cedula':'sum'}).reset_index()
@@ -360,7 +372,7 @@ def filter_confirmado_data(df,group_type_selector, province_selector, sex_select
 
     return df_filter
 
-def filter_death_data(df,group_type_selector, province_selector, sex_selector, start_time, end_time):    
+def filter_death_data(df,group_type_selector, province_selector, sex_selector, start_time, end_time, edades):    
     #filter by province
     if province_selector >0:
         df = df.loc[df['prov'] == province_selector]
@@ -369,6 +381,9 @@ def filter_death_data(df,group_type_selector, province_selector, sex_selector, s
     if sex_selector != 'T':
         df = df.loc[df['sexo'] == sex_selector]
     
+    #filter by edad
+    df = df.loc[df['edad'].between(edades[0],edades[1])]
+
     #Group by period
     df_filter = df.groupby([pd.Grouper(key='fecha_fallecido', freq=group_type_selector)]).agg({'fallecido':'sum'}).reset_index()
     df_filter['cum_death'] = df_filter['fallecido'].cumsum()
@@ -570,11 +585,12 @@ def R0_mitigating(t, r0, η, r_bar):
         Input('provincia_dropdown', 'value'),
         Input('group_type_selector', 'value'),
         Input('sex_selector', 'value'),
+        Input('edad_range','value')
     ]
 )
-def update_cumsum(start_date, end_date, provincia, group_type, sex):
-    confirmado = filter_confirmado_data(df_conf,group_type,provincia,sex,start_date,end_date)
-    death = filter_death_data(df_def,group_type,provincia,sex,start_date,end_date)
+def update_cumsum(start_date, end_date, provincia, group_type, sex, edades):
+    confirmado = filter_confirmado_data(df_conf,group_type,provincia,sex,start_date,end_date, edades)
+    death = filter_death_data(df_def,group_type,provincia,sex,start_date,end_date, edades)
 
     confirmado['smoothed'] = confirmado['confirmado'].rolling(7, win_type='gaussian', min_periods=1, center=True).mean(std=2).round()
     fecha = confirmado.set_index('fecha_confirmado')
