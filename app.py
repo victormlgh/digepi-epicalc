@@ -26,25 +26,25 @@ sns_format = '%m/%d/%Y'
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("data").resolve()
 
+url_prov ='https://github.com/victormlgh/digepi-epicalc/blob/main/data/provincias.csv?raw=true'
+provincias = pd.read_csv(url_prov)
 
-provincias = pd.read_csv(DATA_PATH.joinpath('provincias.csv'))
-
-df_conf = pd.read_csv(DATA_PATH.joinpath('ops-filter.csv'))
-
-#url_conf = 'https://github.com/victormlgh/digepi-epicalc/blob/main/application/data/ops-conf.csv?raw=true'
-#df_conf = pd.read_csv(url_conf)
+url_conf = 'https://github.com/victormlgh/digepi-epicalc/blob/main/data/ops-filter.csv?raw=true'
+df_conf = pd.read_csv(url_conf)
 
 df_conf['confirmado']=df_conf['confirmado'].astype(int)
 df_conf['cedula']=df_conf['cedula'].astype(int)
 df_conf['prov']=df_conf['prov'].astype(int)
 df_conf['fecha_confirmado'] = pd.to_datetime(df_conf['fecha_confirmado'], format=date_format)
 
-df_def = pd.read_csv(DATA_PATH.joinpath('ops-def.csv'))
+url_def = 'https://github.com/victormlgh/digepi-epicalc/blob/main/data/ops-def.csv?raw=true'
+df_def = pd.read_csv(url_def)
 df_def['fallecido']=df_def['fallecido'].astype(int)
 df_def['prov']=df_def['prov'].astype(int)
 df_def['fecha_fallecido'] = pd.to_datetime(df_def['fecha_fallecido'], format=date_format)
 
-df_sns = pd.read_csv(DATA_PATH.joinpath('sns.csv'))
+url_sns='https://github.com/victormlgh/digepi-epicalc/blob/main/data/sns.csv?raw=true'
+df_sns = pd.read_csv(url_sns)
 df_sns['fecha'] = pd.to_datetime(df_sns['fecha'], format=sns_format)
 
 # -----------------------------
@@ -67,7 +67,7 @@ app.layout = html.Div(
                     [
                         html.A(
                             html.Img(
-                                src=app.get_asset_url("Logo_SaludPublica.png"),
+                                src='https://github.com/victormlgh/digepi-epicalc/raw/main/assets/Logo_SaludPublica.png',
                                 style={
                                     "height": "150px",
                                     "width": "auto",
@@ -102,7 +102,7 @@ app.layout = html.Div(
                     [
                         html.A(
                             html.Img(
-                                src=app.get_asset_url("Logo_DIGEPI.png"),
+                                src='https://github.com/victormlgh/digepi-epicalc/raw/main/assets/Logo_DIGEPI.png',
                                 style={
                                     "height": "150px",
                                     "width": "auto",
