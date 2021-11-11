@@ -175,7 +175,9 @@ app.layout = html.Div(
                                 value="T",
                                 labelStyle={"display": "inline-block"},
                                 className="dcc_control",
-                            ),   
+                            ), 
+                        html.Br(),
+                          
                         html.P("Filtrar por edad:", className="control_label"),
                         dcc.RangeSlider(
                             id='edad_range',
