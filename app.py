@@ -215,7 +215,7 @@ app.layout = html.Div(
                                     dcc.Graph(id="rt")
                                 ],
                                 ),
-                                dcc.Tab(label='Tasa de Positividad', children=[
+                                dcc.Tab(label='Positividad', children=[
                                     dcc.Graph(id="positivity_rate")
                                 ],
                                 ),
