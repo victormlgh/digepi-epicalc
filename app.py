@@ -28,7 +28,7 @@ DATA_PATH = PATH.joinpath("data").resolve()
 
 url_prov ='https://github.com/victormlgh/digepi-epicalc/blob/main/data/provincias.csv?raw=true'
 provincias = pd.read_csv(url_prov)
-url_poblacion = DATA_PATH.joinpath('poblacion.csv')
+url_poblacion = 'https://github.com/victormlgh/digepi-epicalc/blob/main/data/poblacion.csv?raw=true'
 poblacion = pd.read_csv(url_poblacion)
 
 url_conf = 'https://github.com/victormlgh/digepi-epicalc/blob/main/data/ops-filter.csv?raw=true'
