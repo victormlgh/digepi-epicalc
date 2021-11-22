@@ -1,0 +1,265 @@
+id,provincia,sexo,rango_edad,poblacion
+0,República Dominicana,M,1,1869057
+0,República Dominicana,M,2,2412709
+0,República Dominicana,M,3,793384
+0,República Dominicana,M,4,525823
+1,Distrito Nacional,M,1,164291
+1,Distrito Nacional,M,2,227303
+1,Distrito Nacional,M,3,77614
+1,Distrito Nacional,M,4,53117
+2,Azua,M,1,40315
+2,Azua,M,2,49632
+2,Azua,M,3,16071
+2,Azua,M,4,12191
+3,Baoruco,M,1,20745
+3,Baoruco,M,2,22284
+3,Baoruco,M,3,5809
+3,Baoruco,M,4,5457
+4,Barahona,M,1,35341
+4,Barahona,M,2,39962
+4,Barahona,M,3,11795
+4,Barahona,M,4,9544
+5,Dajabón,M,1,11721
+5,Dajabón,M,2,14694
+5,Dajabón,M,3,4457
+5,Dajabón,M,4,4197
+6,Duarte,M,1,46412
+6,Duarte,M,2,66364
+6,Duarte,M,3,22843
+6,Duarte,M,4,17970
+7,Elías Piña,M,1,14146
+7,Elías Piña,M,2,12926
+7,Elías Piña,M,3,3154
+7,Elías Piña,M,4,3269
+8,El Seibo,M,1,18790
+8,El Seibo,M,2,21221
+8,El Seibo,M,3,6315
+8,El Seibo,M,4,5659
+9,Espaillat,M,1,36270
+9,Espaillat,M,2,54027
+9,Espaillat,M,3,19629
+9,Espaillat,M,4,13926
+10,Independencia,M,1,13448
+10,Independencia,M,2,12726
+10,Independencia,M,3,3366
+10,Independencia,M,4,2840
+11,La Altagracia,M,1,76251
+11,La Altagracia,M,2,95851
+11,La Altagracia,M,3,32860
+11,La Altagracia,M,4,13927
+12,La Romana,M,1,51274
+12,La Romana,M,2,60838
+12,La Romana,M,3,19495
+12,La Romana,M,4,12445
+13,La Vega,M,1,66034
+13,La Vega,M,2,91103
+13,La Vega,M,3,32577
+13,La Vega,M,4,23038
+14,María Trinidad Sánchez,M,1,20683
+14,María Trinidad Sánchez,M,2,31108
+14,María Trinidad Sánchez,M,3,10539
+14,María Trinidad Sánchez,M,4,8635
+15,Monte Cristi,M,1,20770
+15,Monte Cristi,M,2,25736
+15,Monte Cristi,M,3,9509
+15,Monte Cristi,M,4,7312
+16,Pedernales,M,1,7095
+16,Pedernales,M,2,8403
+16,Pedernales,M,3,2695
+16,Pedernales,M,4,1806
+17,Peravia,M,1,36272
+17,Peravia,M,2,42563
+17,Peravia,M,3,13715
+17,Peravia,M,4,9879
+18,Puerto Plata,M,1,52787
+18,Puerto Plata,M,2,71798
+18,Puerto Plata,M,3,26507
+18,Puerto Plata,M,4,19504
+19,Hermanas Mirabal,M,1,14144
+19,Hermanas Mirabal,M,2,18942
+19,Hermanas Mirabal,M,3,7067
+19,Hermanas Mirabal,M,4,5837
+20,Samaná,M,1,20052
+20,Samaná,M,2,26995
+20,Samaná,M,3,8957
+20,Samaná,M,4,5908
+21,San Cristóbal,M,1,121737
+21,San Cristóbal,M,2,151410
+21,San Cristóbal,M,3,44724
+21,San Cristóbal,M,4,29395
+22,San Juan,M,1,37137
+22,San Juan,M,2,43556
+22,San Juan,M,3,14923
+22,San Juan,M,4,13970
+23,San Pedro de Macorís,M,1,51894
+23,San Pedro de Macorís,M,2,66143
+23,San Pedro de Macorís,M,3,20953
+23,San Pedro de Macorís,M,4,15182
+24,Sánchez Ramírez,M,1,22598
+24,Sánchez Ramírez,M,2,34525
+24,Sánchez Ramírez,M,3,11400
+24,Sánchez Ramírez,M,4,9151
+25,Santiago,M,1,165745
+25,Santiago,M,2,235373
+25,Santiago,M,3,86952
+25,Santiago,M,4,55029
+26,Santiago Rodríguez,M,1,8534
+26,Santiago Rodríguez,M,2,12587
+26,Santiago Rodríguez,M,3,4228
+26,Santiago Rodríguez,M,4,3790
+27,Valverde,M,1,30681
+27,Valverde,M,2,40927
+27,Valverde,M,3,14850
+27,Valverde,M,4,9311
+28,Monseñor Nouel,M,1,28267
+28,Monseñor Nouel,M,2,38976
+28,Monseñor Nouel,M,3,13505
+28,Monseñor Nouel,M,4,9627
+29,Monte Plata,M,1,34815
+29,Monte Plata,M,2,42413
+29,Monte Plata,M,3,11946
+29,Monte Plata,M,4,10904
+30,Hato Mayor,M,1,14121
+30,Hato Mayor,M,2,18306
+30,Hato Mayor,M,3,5860
+30,Hato Mayor,M,4,4923
+31,San José de Ocoa,M,1,7416
+31,San José de Ocoa,M,2,10804
+31,San José de Ocoa,M,3,4591
+31,San José de Ocoa,M,4,3810
+32,Santo Domingo,M,1,579271
+32,Santo Domingo,M,2,723213
+32,Santo Domingo,M,3,224478
+32,Santo Domingo,M,4,124270
+0,República Dominicana,F,1,1804582
+0,República Dominicana,F,2,2416692
+0,República Dominicana,F,3,834988
+0,República Dominicana,F,4,596049
+1,Distrito Nacional,F,1,160206
+1,Distrito Nacional,F,2,251433
+1,Distrito Nacional,F,3,92829
+1,Distrito Nacional,F,4,74539
+2,Azua,F,1,38226
+2,Azua,F,2,41764
+2,Azua,F,3,14429
+2,Azua,F,4,11405
+3,Baoruco,F,1,19386
+3,Baoruco,F,2,19553
+3,Baoruco,F,3,5166
+3,Baoruco,F,4,4772
+4,Barahona,F,1,34018
+4,Barahona,F,2,36056
+4,Barahona,F,3,11261
+4,Barahona,F,4,9001
+5,Dajabón,F,1,11088
+5,Dajabón,F,2,13425
+5,Dajabón,F,3,4491
+5,Dajabón,F,4,4061
+6,Duarte,F,1,44552
+6,Duarte,F,2,63184
+6,Duarte,F,3,23461
+6,Duarte,F,4,18950
+7,Elías Piña,F,1,12818
+7,Elías Piña,F,2,9638
+7,Elías Piña,F,3,2795
+7,Elías Piña,F,4,2991
+8,El Seibo,F,1,17938
+8,El Seibo,F,2,18568
+8,El Seibo,F,3,5372
+8,El Seibo,F,4,4533
+9,Espaillat,F,1,35120
+9,Espaillat,F,2,50879
+9,Espaillat,F,3,19305
+9,Espaillat,F,4,15124
+10,Independencia,F,1,12870
+10,Independencia,F,2,12274
+10,Independencia,F,3,3337
+10,Independencia,F,4,2547
+11,La Altagracia,F,1,73929
+11,La Altagracia,F,2,93095
+11,La Altagracia,F,3,28132
+11,La Altagracia,F,4,12712
+12,La Romana,F,1,49466
+12,La Romana,F,2,62318
+12,La Romana,F,3,22228
+12,La Romana,F,4,15558
+13,La Vega,F,1,63334
+13,La Vega,F,2,86848
+13,La Vega,F,3,32841
+13,La Vega,F,4,24633
+14,María Trinidad Sánchez,F,1,19547
+14,María Trinidad Sánchez,F,2,28863
+14,María Trinidad Sánchez,F,3,10558
+14,María Trinidad Sánchez,F,4,8729
+15,Monte Cristi,F,1,19766
+15,Monte Cristi,F,2,23094
+15,Monte Cristi,F,3,8429
+15,Monte Cristi,F,4,7042
+16,Pedernales,F,1,6873
+16,Pedernales,F,2,7131
+16,Pedernales,F,3,2234
+16,Pedernales,F,4,1359
+17,Peravia,F,1,34934
+17,Peravia,F,2,42383
+17,Peravia,F,3,15509
+17,Peravia,F,4,11422
+18,Puerto Plata,F,1,50507
+18,Puerto Plata,F,2,69546
+18,Puerto Plata,F,3,27556
+18,Puerto Plata,F,4,20077
+19,Hermanas Mirabal,F,1,13545
+19,Hermanas Mirabal,F,2,17637
+19,Hermanas Mirabal,F,3,7013
+19,Hermanas Mirabal,F,4,6350
+20,Samaná,F,1,19154
+20,Samaná,F,2,24902
+20,Samaná,F,3,8403
+20,Samaná,F,4,5791
+21,San Cristóbal,F,1,116955
+21,San Cristóbal,F,2,149284
+21,San Cristóbal,F,3,47849
+21,San Cristóbal,F,4,33328
+22,San Juan,F,1,34612
+22,San Juan,F,2,35021
+22,San Juan,F,3,12869
+22,San Juan,F,4,12875
+23,San Pedro de Macorís,F,1,49817
+23,San Pedro de Macorís,F,2,66539
+23,San Pedro de Macorís,F,3,24016
+23,San Pedro de Macorís,F,4,18463
+24,Sánchez Ramírez,F,1,21705
+24,Sánchez Ramírez,F,2,30763
+24,Sánchez Ramírez,F,3,10763
+24,Sánchez Ramírez,F,4,9146
+25,Santiago,F,1,160681
+25,Santiago,F,2,244360
+25,Santiago,F,3,94738
+25,Santiago,F,4,65435
+26,Santiago Rodríguez,F,1,8268
+26,Santiago Rodríguez,F,2,11260
+26,Santiago Rodríguez,F,3,4085
+26,Santiago Rodríguez,F,4,3672
+27,Valverde,F,1,29626
+27,Valverde,F,2,38434
+27,Valverde,F,3,13721
+27,Valverde,F,4,9677
+28,Monseñor Nouel,F,1,27159
+28,Monseñor Nouel,F,2,37397
+28,Monseñor Nouel,F,3,14106
+28,Monseñor Nouel,F,4,10728
+29,Monte Plata,F,1,33116
+29,Monte Plata,F,2,38355
+29,Monte Plata,F,3,12128
+29,Monte Plata,F,4,10141
+30,Hato Mayor,F,1,13625
+30,Hato Mayor,F,2,17283
+30,Hato Mayor,F,3,6081
+30,Hato Mayor,F,4,4875
+31,San José de Ocoa,F,1,6901
+31,San José de Ocoa,F,2,7883
+31,San José de Ocoa,F,3,3756
+31,San José de Ocoa,F,4,3047
+32,Santo Domingo,F,1,564840
+32,Santo Domingo,F,2,767522
+32,Santo Domingo,F,3,245527
+32,Santo Domingo,F,4,153066

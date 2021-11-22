@@ -28,6 +28,8 @@ DATA_PATH = PATH.joinpath("data").resolve()
 
 url_prov ='https://github.com/victormlgh/digepi-epicalc/blob/main/data/provincias.csv?raw=true'
 provincias = pd.read_csv(url_prov)
+url_poblacion = DATA_PATH.joinpath('poblacion.csv')
+poblacion = pd.read_csv(url_poblacion)
 
 url_conf = 'https://github.com/victormlgh/digepi-epicalc/blob/main/data/ops-filter.csv?raw=true'
 df_conf = pd.read_csv(url_conf)
@@ -47,6 +49,31 @@ df_def['fecha_fallecido'] = pd.to_datetime(df_def['fecha_fallecido'], format=dat
 url_sns='https://github.com/victormlgh/digepi-epicalc/blob/main/data/sns.csv?raw=true'
 df_sns = pd.read_csv(url_sns)
 df_sns['fecha'] = pd.to_datetime(df_sns['fecha'], format=sns_format)
+
+options_movilidad=[
+
+    {'label': 'Cuarentena Total', 'value': 0},
+    {'label': 'Mascarilla, higiene y toque de queda de 18 horas', 'value': 0.25},
+    {'label': 'Mascarilla, higiene y toque de queda de 12 horas', 'value': 0.5},
+    {'label': 'Mascarilla, higiene y toque de queda de 6 horas', 'value': 0.75},
+    {'label': 'Vacuna, mascarilla y libre circulación', 'value': 1}
+]
+
+options_edad=[
+    {'label': 'Toda la población', 'value': 0},
+    {'label': '< 20 años', 'value': 1},
+    {'label': '20-49 años', 'value': 2},
+    {'label': '50-64 años', 'value': 3},
+    {'label': '>65 años', 'value': 4}
+]
+
+rango_edad = [
+    [0,100],
+    [0,19],
+    [20,49],
+    [50,64],
+    [65,100]
+]
 
 # -----------------------------
 # Declare APP
@@ -186,13 +213,20 @@ app.layout = html.Div(
                         html.Br(),
                           
                         html.P("Filtrar por edad:", className="control_label"),
-                        dcc.RangeSlider(
+                        #dcc.RangeSlider(
+                        #    id='edad_range',
+                        #    min=0,
+                        #    max=100,
+                        #    step=1,
+                        #    value=[0,100],
+                        #    tooltip={"placement": "bottom", "always_visible": True}
+                        #),
+                        dcc.Dropdown(
                             id='edad_range',
-                            min=0,
-                            max=100,
-                            step=1,
-                            value=[0,100],
-                            tooltip={"placement": "bottom", "always_visible": True}
+                            options=options_edad,
+                            value=0,
+                            multi=False,
+                            clearable=False
                         ),
 
                     ],
@@ -291,7 +325,7 @@ app.layout = html.Div(
                         html.P("Días de estimación: ", className="control_label"),
                         dcc.Slider(
                             id='estimation_date',
-                            min=0,
+                            min=1,
                             max=550,
                             step=1,
                             value=100,
@@ -301,7 +335,7 @@ app.layout = html.Div(
                         html.P("Período medio de incubación: ", className="control_label"),
                         dcc.Slider(
                             id='incubation_period',
-                            min=0,
+                            min=1,
                             max=45,
                             step=1,
                             value=5,
@@ -312,7 +346,7 @@ app.layout = html.Div(
                         html.P("Duración media de la enfermedad: ", className="control_label"),
                         dcc.Slider(
                             id='illness_duration',
-                            min=0,
+                            min=1,
                             max=45,
                             step=1,
                             value=7,
@@ -323,7 +357,7 @@ app.layout = html.Div(
                         html.P("Valores de Rt a evaluar", className="control_label"),
                         dcc.RangeSlider(
                             id='rt_rs',
-                            min=0,
+                            min=0.1,
                             max=6,
                             step=0.1,
                             value=[1.6,3],
@@ -332,13 +366,10 @@ app.layout = html.Div(
                         html.Br(),
 
                         html.P("Escenarios de control de movilidad", className="control_label"),
-                        dcc.RangeSlider(
+                        dcc.Checklist(
                             id='eta',
-                            min=0,
-                            max=1,
-                            step=0.1,
-                            value=[0.1,0.3],
-                            tooltip={"placement": "bottom", "always_visible": True}
+                            options=options_movilidad,
+                            value=[0,0.25,0.5,0.75,1],
                         ),
                         html.Br(),             
                     ],
@@ -579,6 +610,19 @@ def graficar_seir(paths, labels, title, times):
 def R0_mitigating(t, r0, η, r_bar):
     R0 = r0 * np.exp(- η * t) + (1 - np.exp(- η * t)) * r_bar
     return R0
+
+def population(provincia, sex, i_edad):
+    df = poblacion.loc[poblacion['id']==provincia]
+
+    if sex != 'T':
+        df = df.loc[df['sexo']==sex]
+
+    if i_edad == 0:
+        pop_size = df['poblacion'].sum()
+    else:
+        pop_size = df.loc[df['rango_edad']==i_edad]['poblacion'].sum()
+
+    return pop_size
 # -----------------------------
 # Callbacks section
 # -----------------------------
@@ -603,7 +647,8 @@ def R0_mitigating(t, r0, η, r_bar):
         Input('edad_range','value')
     ]
 )
-def update_cumsum(start_date, end_date, provincia, group_type, sex, edades):
+def update_cumsum(start_date, end_date, provincia, group_type, sex, i_edad):
+    edades = rango_edad[i_edad]
     confirmado = filter_confirmado_data(df_conf,group_type,provincia,sex,start_date,end_date, edades)
     death = filter_death_data(df_def,group_type,provincia,sex,start_date,end_date, edades)
 
@@ -651,13 +696,15 @@ def update_cumsum(start_date, end_date, provincia, group_type, sex, edades):
         Input('provincia_dropdown', 'value'),
         Input('rt_rs', 'value'),
         Input('eta', 'value'),
+        Input('sex_selector', 'value'),
+        Input('edad_range','value')
 
         
     ]
 )
-def update_seir(data, t_len, incubation_period, illness_duration, provincia, rt, eta):
+def update_seir(data, t_len, incubation_period, illness_duration, provincia, rt, eta, sex, i_edad):
 
-    pop_size = provincias['poblacion'].iloc[provincia]
+    pop_size = population(provincia, sex, i_edad)
 
     gamma = 1/incubation_period
     sigma = 1/illness_duration
@@ -687,17 +734,18 @@ def update_seir(data, t_len, incubation_period, illness_duration, provincia, rt,
     results.append(graficar_seir(i_paths, labels, 'Cantidad de casos por fracción de población', t_vec))
     results.append(graficar_seir(c_paths, labels, 'Cantidad de casos por fracción de población', t_vec))
 
-    eta_vals = np.linspace(eta[0], eta[1], 6)
-    labels = [f'η = {r:.2f}' for r in eta_vals]
+    #eta_vals = np.linspace(eta[0], eta[1], 6)
+    eta_label = [d['label'] for d in options_movilidad if d['value'] in eta]
+    labels = ['η = '+r for r in eta_label]
 
     etas =[]
-    for i in eta_vals:
+    for i in eta:
         etas.append(R0_mitigating(t_vec,rt[0], i, rt[1]))
 
     results.append(graficar_seir(etas, labels, 'Mitigación por diferentes tasas de restricción de movilidad', t_vec))
 
     i_paths, c_paths = [], []
-    for i in eta_vals:
+    for i in eta:
         r = lambda t: R0_mitigating(t,rt[0], i, rt[1])
         i_path, c_path = solve_path(r, t_vec, x_0, gamma, sigma)
         i_paths.append(i_path)
